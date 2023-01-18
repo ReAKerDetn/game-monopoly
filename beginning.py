@@ -23,9 +23,9 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 clock = pygame.time.Clock()
 FPS = 60
-logo_monopoly = pygame.image.load("logo.png")
-hat = pygame.image.load("hat.png")
-exit_menu = pygame.image.load("exit_menu.jpg")
+logo_monopoly = pygame.image.load("data/logo.png")
+hat = pygame.image.load("data/hat.png")
+exit_menu = pygame.image.load("data/exit_menu.jpg")
 
 
 # while pygame.event.wait().type != pygame.QUIT:
