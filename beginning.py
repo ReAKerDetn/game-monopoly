@@ -13,72 +13,65 @@ import win32gui, win32con
 # screen = win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
 pygame.init()
 WIDTH, HEIGHT = GetSystemMetrics(0), GetSystemMetrics(1)
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-# image_cross = pygame.image.load("крест.jpg")
-print(WIDTH)
-print(HEIGHT)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
-clock = pygame.time.Clock()
 FPS = 60
-logo_monopoly = pygame.image.load("data/logo.png")
-hat = pygame.image.load("data/hat.png")
-exit_menu = pygame.image.load("data/exit_menu.jpg")
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+clock = pygame.time.Clock()
+all_sprites = pygame.sprite.Group()
 
 
-# while pygame.event.wait().type != pygame.QUIT:
-#     screen.fill((black))
-#     screen.blit(image, (WIDTH - 50, 0))
-#     pygame.display.flip()
+class Main:
+    def __init__(self):
+        # start_menu = pygame.image.load("фон3.jpg")      # изображение фона стартового меню
+        logo_monopoly = pygame.image.load("data/logo.png")
+        hat = pygame.image.load("data/hat.png")
+        exit_menu = pygame.image.load("data/exit.png")
+        mr_monopoly = pygame.image.load("data/mr-monopoly.png")
+
+        button_run = Button(200, 70)
+        button_quit = Button(55, 37)         # изменил
+        button_save = Button(100, 50)  # может быть в игре будет сейв так как игра довольно длинная, просто идеи
+
+        run = True
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                    # pygame.quit()
+                    # quit()
+
+            screen.fill(pygame.Color(64, 64, 64), pygame.Rect(0, 0, WIDTH, HEIGHT / 100 * 15))
+
+            # screen.blit(image_cross, (WIDTH - 50, 0))
+            # pygame.display.flip()
 
 
-def menu():
-    # start_menu = pygame.image.load("фон3.jpg")      # изображение фона стартового меню
+            button_quit.draw(WIDTH - 55, 0, "", quit, 40)
+            button_run.draw((WIDTH - 200) // 2, (HEIGHT - 70) // 2, "Играть", Game, 40)     # изменил
 
-    button_run = Button(200, 70)
-    button_quit = Button(95, 69)         # изменил
-    button_save = Button(100, 50)  # может быть в игре будет сейв так как игра довольно длинная, просто идеи
+            screen.blit(exit_menu, (WIDTH-55, 0))           # для любых изменил
+            # screen.blit(logo_monopoly, ((WIDTH-485)//2, (HEIGHT-151)//2 - 300)) расположение логотипа по середине экрана
+            screen.blit(logo_monopoly, ((WIDTH - 485) // 2, HEIGHT / 100 * 15 / 6))
+            screen.blit(mr_monopoly, (300, 500))
 
-    run = True
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-                # pygame.quit()
-                # quit()
-
-        screen.fill((WHITE))
-
-        # screen.blit(image_cross, (WIDTH - 50, 0))
-        # pygame.display.flip()
-
-        # screen.blit(start_menu, (0, 0))        # если будет какая то картинка в начале игры разрешение 1920x1080
-
-        button_quit.draw(WIDTH-95, 0, "Выход", quit, 40)
-        button_run.draw((WIDTH-200)//2, (HEIGHT-70)//2, "Играть", game, 40)     # изменил
-
-        screen.blit(exit_menu, (WIDTH-95, 0))           # для любых изменил
-        screen.blit(logo_monopoly, ((WIDTH-485)//2, (HEIGHT-151)//2 - 300))      # изменил
-        screen.blit(hat, (300, 500))
-
-        pygame.display.update()
-        clock.tick(FPS)
+            pygame.display.update()
+            clock.tick(FPS)
 
 
-def game():  # просто как функция начала игры или лучше класс?
-    screen.fill((BLACK))
+class Game:
+    screen.fill(pygame.Color(214, 210, 210))
     pygame.display.update()
     pass
 
 
-class Button:
+class Button(pygame.sprite.Sprite):
     def __init__(self, width, height):
+        super().__init__(all_sprites)
         self.width = width
         self.height = height
-        # self.inactive_col = inactive_color      # в случаи не статичного подсвечивания
-        # self.active_col = active_color
 
     def draw(self, x, y, message, action=None, font_size=30):
         mouse = pygame.mouse.get_pos()
@@ -110,6 +103,6 @@ def loadGIF(filename):
 
 
 if __name__ == '__main__':
-    menu()
+    Main()
     pygame.quit()
     quit()
