@@ -50,6 +50,7 @@ def menu():
                 # quit()
 
         screen.fill((WHITE))
+        
 
         # screen.blit(image_cross, (WIDTH - 50, 0))
         # pygame.display.flip()
