@@ -25,15 +25,13 @@ all_sprites = pygame.sprite.Group()
 
 class Main:
     def __init__(self):
-        # start_menu = pygame.image.load("фон3.jpg")      # изображение фона стартового меню
         logo_monopoly = pygame.image.load("data/logo.png")
-        hat = pygame.image.load("data/hat.png")
+        run_logo = pygame.image.load("data/run.png")
         exit_menu = pygame.image.load("data/exit.png")
-        mr_monopoly = pygame.image.load("data/mr-monopoly.png")
+        mr_monopoly = pygame.image.load("data/mr-monopoly2.png")
 
         button_run = Button(200, 70)
-        button_quit = Button(55, 37)         # изменил
-        button_save = Button(100, 50)  # может быть в игре будет сейв так как игра довольно длинная, просто идеи
+        button_quit = Button(55, 37)
 
         run = True
         while run:
@@ -45,17 +43,22 @@ class Main:
 
             screen.fill(pygame.Color(64, 64, 64), pygame.Rect(0, 0, WIDTH, HEIGHT / 100 * 15))
 
-            # screen.blit(image_cross, (WIDTH - 50, 0))
-            # pygame.display.flip()
-
-
             button_quit.draw(WIDTH - 55, 0, "", quit, 40)
             button_run.draw((WIDTH - 200) // 2, (HEIGHT - 70) // 2, "Играть", Game, 40)     # изменил
 
-            screen.blit(exit_menu, (WIDTH-55, 0))           # для любых изменил
-            # screen.blit(logo_monopoly, ((WIDTH-485)//2, (HEIGHT-151)//2 - 300)) расположение логотипа по середине экрана
+            screen.blit(exit_menu, (WIDTH - 55, 0))     
             screen.blit(logo_monopoly, ((WIDTH - 485) // 2, HEIGHT / 100 * 15 / 6))
-            screen.blit(mr_monopoly, (300, 500))
+            screen.blit(mr_monopoly, (200, 350))
+            screen.blit(run_logo, ((WIDTH - 512) // 2, (HEIGHT - 512) // 2))
+
+            words = 'Хотите испытать удачу и попробовать себя в роли предпринимателя?'
+            words2 = 'Тогда добро пожаловать в Монополию!'
+            text = font.render(words, True, pygame.Color("black"))
+            place = text.get_rect(center=(WIDTH - WIDTH // 5, HEIGHT * 0.25))
+            text2 = font.render(words2, True, pygame.Color("black"))
+            place2 = text.get_rect(center=(WIDTH - WIDTH // 5, HEIGHT * 0.25 + 50))
+            screen.blit(text, place)
+            screen.blit(text2, place2)
 
             pygame.display.update()
             clock.tick(FPS)
@@ -103,6 +106,8 @@ def loadGIF(filename):
 
 
 if __name__ == '__main__':
+    pygame.display.set_caption("Монополия")
+    font = pygame.font.SysFont('poppins', 40)
     Main()
     pygame.quit()
     quit()
