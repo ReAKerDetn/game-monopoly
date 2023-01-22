@@ -20,12 +20,12 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
 
-logo_monopoly = pygame.image.load("logo.png")
-hat = pygame.image.load("hat.png")
-exit_menu = pygame.image.load("exit.png")
-mr_monopoly = pygame.image.load("mr-monopoly.png")
-board = pygame.image.load("board.png")
-back = pygame.image.load("back.png")
+logo_monopoly = pygame.image.load("data/logo.png")
+hat = pygame.image.load("data/hat.png")
+exit_menu = pygame.image.load("data/exit.png")
+mr_monopoly = pygame.image.load("data/mr-monopoly.png")
+board = pygame.image.load("data/board.png")
+back = pygame.image.load("data/back.png")
 
 
 class Main:
